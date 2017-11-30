@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Current Contacts{% endblock %}
+
+{% block content %}
+    <p>List of current contacts</p>
+    <ul>
+        {% for subscription in topic %}
+        <li>{{ subscription.Endpoint }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+
+

@@ -1,0 +1,28 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'sns/style.css' %}" />
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css" />
+    <title>{% block title %}My amazing site{% endblock %}</title>
+</head>
+
+<body>
+<div id="sidebar">
+    {% block sidebar %}
+    <ul>
+        <li><a href="{% url 'index' %}">Home</a></li>
+        <li><a href="{% url 'all_contacts' %}">All Contacts</a></li>
+        <li><a href="{% url 'add_contact' %}">Add Contact</a></li>
+        <li><a href="{% url 'remove_contact' %}">Remove Contact</a></li>
+        <li><a href="{% url 'notify_contacts' %}">Notify Contact</a></li>
+    </ul>
+    {% endblock %}
+</div>
+
+<div id="content">
+    {% block content %}{% endblock %}
+</div>
+</body>
+</html>
