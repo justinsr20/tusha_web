@@ -1,26 +1,28 @@
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'sns/style.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'sns/node_modules/bootstrap/dist/css/bootstrap.min.css' %}"/>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>{% block title %}My amazing site{% endblock %}</title>
+    <title>{% block title %}Tusha Promotions{% endblock %}</title>
 </head>
 
 <body>
-<div id="sidebar">
-    {% block sidebar %}
-    <ul>
-        <li><a href="{% url 'index' %}">Home</a></li>
-        <li><a href="{% url 'all_contacts' %}">All Contacts</a></li>
-        <li><a href="{% url 'add_contact' %}">Add Contact</a></li>
-        <li><a href="{% url 'remove_contact' %}">Remove Contact</a></li>
-        <li><a href="{% url 'notify_contacts' %}">Notify Contact</a></li>
-    </ul>
-    {% endblock %}
-</div>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{% url 'index' %}">Home</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="{% url 'all_contacts' %}">All Contacts</a></li>
+            <li><a href="{% url 'add_contact' %}">Add Contact</a></li>
+            <li><a href="{% url 'remove_contact' %}">Remove Contact</a></li>
+            <li><a href="{% url 'notify_contacts' %}">Notify Contacts</a></li>
+        </ul>
+    </div>
+</nav>
 
-<div id="content">
+<div class="container">
     {% block content %}{% endblock %}
 </div>
 </body>

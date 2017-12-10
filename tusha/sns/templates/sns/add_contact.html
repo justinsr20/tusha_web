@@ -1,11 +1,18 @@
 {% extends "base.html" %}
 
-{% block title %}Current Contacts{% endblock %}
-
 {% block content %}
-    <form action="add_contact/" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Submit" />
-    </form>
+<form action="add_contact/" method="post">{% csrf_token %}
+    {% for field in form %}
+    <div class="form-group {% if field.errors %}has-error{% endif %}">
+        <div class="invalid-feedback">
+            {% for error in field.errors %}
+            <span class="help-block">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <label class="" for="{{ field.name }}">{{ field.label }}</label>
+        {{ field }}
+        {% endfor %}
+    </div>
+    <input class="btn btn-primary" type="submit" value="Submit"/>
+</form>
 {% endblock %}

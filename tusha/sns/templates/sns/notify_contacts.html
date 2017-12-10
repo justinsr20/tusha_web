@@ -1,11 +1,10 @@
 {% extends "base.html" %}
 
-{% block title %}Current Contacts{% endblock %}
-
 {% block content %}
-    <form action="notify_contacts/" method="post">
-        {% csrf_token %}
+<form action="notify_contacts/" method="post">{% csrf_token %}
+    <div class="form-group">
         {{ form }}
-        <input type="submit" value="Submit" />
-    </form>
+    </div>
+    <input type="submit" class="btn btn-primary" value="Submit"/>
+</form>
 {% endblock %}

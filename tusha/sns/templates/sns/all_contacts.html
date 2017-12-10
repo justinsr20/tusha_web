@@ -1,14 +1,12 @@
 {% extends "base.html" %}
 
-{% block title %}Current Contacts{% endblock %}
-
 {% block content %}
-    <p>List of current contacts</p>
-    <ul>
-        {% for subscription in topic %}
-        <li>{{ subscription.Endpoint }}</li>
-        {% endfor %}
-    </ul>
+<h4>List of current contacts</h4>
+<ul class="list-group">
+    {% for subscription in topic %}
+    <li class="list-group-item">{{ subscription.Endpoint }}</li>
+    {% endfor %}
+</ul>
 {% endblock %}
 
 
