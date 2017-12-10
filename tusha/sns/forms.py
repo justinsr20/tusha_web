@@ -1,5 +1,5 @@
 from django import forms
-from validators import all_numbers_validator, min_length_validator, not_start_with_zero_validator
+from sns.lib.validators import all_numbers_validator, min_length_validator, not_start_with_zero_validator
 
 
 class AddNumberForm(forms.Form):
