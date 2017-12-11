@@ -4,13 +4,13 @@
 <form action="add_contact/" method="post">{% csrf_token %}
     {% for field in form %}
     <div class="form-group {% if field.errors %}has-error{% endif %}">
+        <label class="" for="{{ field.name }}">{{ field.label }}</label>
+        {{ field }}
         <div class="invalid-feedback">
             {% for error in field.errors %}
             <span class="help-block">{{ error }}</span>
             {% endfor %}
         </div>
-        <label class="" for="{{ field.name }}">{{ field.label }}</label>
-        {{ field }}
         {% endfor %}
     </div>
     <input class="btn btn-primary" type="submit" value="Submit"/>

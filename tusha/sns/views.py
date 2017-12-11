@@ -4,9 +4,9 @@ from __future__ import unicode_literals
 from django.shortcuts import render
 from django.shortcuts import redirect
 
-from sns.lib.sns import remove_subscription, add_subscription, all_subscriptions, notify_subscriptions
-from tusha.settings import AWS_TUSHA_PROMOTIONS_TOPIC_ARN
+from sns.lib.sns import remove_subscription, add_subscription, notify_subscriptions
 from .forms import AddNumberForm, RemoveNumberForm, ContactForm
+from .models import CustomerContacts
 
 
 # Create your views here.
@@ -16,15 +16,19 @@ def index(request):
 
 
 def all_contacts(request):
-    topic = all_subscriptions(AWS_TUSHA_PROMOTIONS_TOPIC_ARN)
-    return render(request, 'all_contacts.html', {'topic': topic['Subscriptions']})
+    c = CustomerContacts.objects.all()
+    return render(request, 'all_contacts.html', {'customers': c})
 
 
 def add_contact(request):
     if request.method == 'POST':
         form = AddNumberForm(request.POST)
         if form.is_valid():
+            new_customer = CustomerContacts(mobile_contact_number=form.cleaned_data['contact_number'],
+                                            first_name=form.cleaned_data['contact_first_name'],
+                                            last_name=form.cleaned_data['contact_last_name'])
             add_subscription(form.cleaned_data['contact_number'])
+            new_customer.save()
             return redirect(all_contacts)
     else:
         form = AddNumberForm()
@@ -36,7 +40,9 @@ def remove_contact(request):
     if request.method == 'POST':
         form = RemoveNumberForm(request.POST)
         if form.is_valid():
+            c = CustomerContacts.objects.get(mobile_contact_number=form.cleaned_data['contact_number'])
             remove_subscription(form.cleaned_data['contact_number'])
+            c.delete()
             return redirect(all_contacts)
     else:
         form = RemoveNumberForm()

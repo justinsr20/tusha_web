@@ -22,8 +22,8 @@ def add_subscription(endpoint):
 
 def remove_subscription(endpoint):
     subscriptions = sns_client.list_subscriptions_by_topic(TopicArn=AWS_TUSHA_PROMOTIONS_TOPIC_ARN)
-    [sns_client.unsubscribe(SubscriptionArn=sub['SubscriptionArn'])
-     for sub in subscriptions['Subscriptions'] if sub['Endpoint'] == '+' + endpoint]
+    [sns_client.unsubscribe(SubscriptionArn=sub['SubscriptionArn']) for sub in subscriptions['Subscriptions']
+     if sub['Endpoint'] == '+' + endpoint]
 
 
 def notify_subscriptions(message):
