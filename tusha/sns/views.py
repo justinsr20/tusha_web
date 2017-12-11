@@ -3,23 +3,25 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render
 from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
 
 from sns.lib.sns import remove_subscription, add_subscription, notify_subscriptions
 from .forms import AddNumberForm, RemoveNumberForm, ContactForm
 from .models import CustomerContacts
 
 
-# Create your views here.
-
+@login_required
 def index(request):
     return render(request, 'index.html', {})
 
 
+@login_required
 def all_contacts(request):
     c = CustomerContacts.objects.all()
     return render(request, 'all_contacts.html', {'customers': c})
 
 
+@login_required
 def add_contact(request):
     if request.method == 'POST':
         form = AddNumberForm(request.POST)
@@ -36,6 +38,7 @@ def add_contact(request):
     return render(request, 'add_contact.html', {'form': form})
 
 
+@login_required
 def remove_contact(request):
     if request.method == 'POST':
         form = RemoveNumberForm(request.POST)
@@ -50,6 +53,7 @@ def remove_contact(request):
     return render(request, 'remove_contact.html', {'form': form})
 
 
+@login_required
 def notify_contacts(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<form action="notify_contacts/" method="post">{% csrf_token %}
+<form action="{% url 'notify_contacts' %}" method="post">{% csrf_token %}
     <div class="form-group">
         {{ form }}
     </div>

@@ -1,13 +1,12 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'sns/node_modules/bootstrap/dist/css/bootstrap.min.css' %}"/>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>{% block title %}Tusha Promotions{% endblock %}</title>
 </head>
-
 <body>
+{% if user.is_authenticated %}
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -18,10 +17,11 @@
             <li><a href="{% url 'add_contact' %}">Add Contact</a></li>
             <li><a href="{% url 'remove_contact' %}">Remove Contact</a></li>
             <li><a href="{% url 'notify_contacts' %}">Notify Contacts</a></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
         </ul>
     </div>
 </nav>
-
+{% endif %}
 <div class="container">
     {% block content %}{% endblock %}
 </div>

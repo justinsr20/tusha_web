@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<form action="add_contact/" method="post">{% csrf_token %}
+<form action="{% url 'add_contact' %}" method="post">{% csrf_token %}
     {% for field in form %}
     <div class="form-group {% if field.errors %}has-error{% endif %}">
         <label class="" for="{{ field.name }}">{{ field.label }}</label>
