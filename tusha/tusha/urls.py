@@ -16,7 +16,10 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
+from sns.views import index
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^sns/', include('sns.urls')),
+    url(r'^$', index)
 ]
