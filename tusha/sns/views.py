@@ -4,10 +4,17 @@ from __future__ import unicode_literals
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import (
+    LoginView
+)
 
 from sns.lib.sns import remove_subscription, add_subscription, notify_subscriptions
-from .forms import AddNumberForm, RemoveNumberForm, ContactForm
+from .forms import AddNumberForm, RemoveNumberForm, ContactForm, CustomAuthenticationForm
 from .models import CustomerContacts
+
+
+class Login(LoginView):
+    form_class = CustomAuthenticationForm
 
 
 @login_required
